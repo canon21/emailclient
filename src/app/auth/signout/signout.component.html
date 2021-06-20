@@ -5,5 +5,17 @@
     <app-input label="Password" [control]="authForm.get('password')" inputType="password"></app-input>
     <app-input label="Password Confirmation" [control]="authForm.get('passwordConfirmation')" inputType="password"></app-input>
 
-    <button class="ui submit button primary">Submit</button>
+    <div 
+      class="ui red basic label" 
+      *ngIf="authForm.get('password').touched && 
+             authForm.get('passwordConfirmation').touched &&
+             authForm.errors"
+    >
+        <p *ngIf="authForm.errors.passwordDontMatch">
+             Password don't match
+        </p>
+    </div>
+    <div>
+        <button class="ui submit button primary">Submit</button>
+    </div>
 </form>
