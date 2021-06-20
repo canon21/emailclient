@@ -10,12 +10,16 @@ interface UsernameAvailableResponse {
 })
 export class AuthService {
 
+  basePath: string = 'https://api.angular-email.com/auth'
   constructor(private http: HttpClient) { }
 
   usernameAvailable(username: string){
-    return this.http.post<UsernameAvailableResponse>('https://api.angular-email.com/auth/username', {
+    return this.http.post<UsernameAvailableResponse>(this.basePath+'/username', {
       username: username
-  })
+  });
   }
 
+  signup(credentials: any){
+     return this.http.post<any>(this.basePath+ '/signup', credentials);
+  }
 }
