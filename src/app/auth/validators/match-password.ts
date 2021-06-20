@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
 
 export class MatchPassword implements Validator{
 
-    validate(formGroup : FormGroup): ValidationErrors {
+    validate(formGroup : FormGroup) {
 
         const {password, passwordConfirmation} = formGroup.value;
 

@@ -13,7 +13,7 @@ export class UniqueUsername implements AsyncValidator {
 
     constructor(private authService: AuthService) { }
 
-    validate = (control: FormControl): Observable<ValidationErrors> => {
+    validate = (control: FormControl) => {
 
         const { value } = control;
 

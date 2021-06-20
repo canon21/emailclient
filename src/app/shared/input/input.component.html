@@ -1,1 +1,27 @@
-<p>input works!</p>
+<div class="field">
+    <label>{{ label }}</label>
+    <input [type]="inputType" [formControl]="control" />
+    <div *ngIf="showErrors()" class="ui pointing red basic label" >
+        <p *ngIf="control.errors.required">
+            Value is required
+        </p>
+        <p *ngIf="control.errors.maxlength">
+            Value you entered is {{ control.errors.maxlength.actualLength}} characters long, but it must be at least
+            {{ control.errors.maxlength.required }} characters
+        </p>
+        <p *ngIf="control.errors.minlength">
+            Value you entered is {{ control.errors.minlength.actualLength}} characters long, but it cannot be longer than
+            {{ control.errors.minlength.required }} characters
+        </p>
+        <p *ngIf="control.errors.pattern">
+            Invalid format, only alphanumeric 
+        </p>
+        <p *ngIf="control.errors.nonUniqueUsername">
+            Username is already used 
+        </p>
+        <p *ngIf="control.errors.noConnection">
+           Not connected for check on username
+        </p>
+    </div>
+
+</div>
