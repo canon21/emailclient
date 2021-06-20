@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { map, catchError } from 'rxjs/operators';
+import { AuthService } from "../auth.service";
 
 //enable dependency injection.
 @Injectable({
@@ -10,15 +11,14 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class UniqueUsername implements AsyncValidator {
 
-    constructor(private http: HttpClient) { }
+    constructor(private authService: AuthService) { }
 
     validate = (control: FormControl): Observable<ValidationErrors> => {
 
         const { value } = control;
 
-        return this.http.post<any>('https://api.angular-email.com/auth/username', {
-            username: value
-        }).pipe(
+        return this.authService.usernameAvailable(value)
+        .pipe(
             //solo se la chiamata API ha una risposta OK esegue la pipe.
             map(value => { 
                 return null; 
