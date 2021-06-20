@@ -39,9 +39,38 @@ export class SignoutComponent implements OnInit {
     if(this.authForm.invalid){
       return;
     }
+    //Qua vengono usate le function e non direttamente i metodi perchè bindiamo alle function la classe signout.
+    //Senza function, non possiamo accedere i campi della classe signout.
+
     this.authService.signup(this.authForm.value)
-    .subscribe((response) => {
-      console.log(response);
-    })
+    .subscribe({
+      next: (response) => {
+        console.log(this);
+      },
+      error: (err) => {
+        if(!err.status) {
+          this.authForm.setErrors({
+            noConnection: true
+          });
+        }
+        else {
+          this.authForm.setErrors({
+            unknowErrors: true
+          })
+        }
+      },
+      complete: () => {
+        console.log('Post Request Terminated');
+      }
+      //with no arrow function
+      /*
+      next(response) {
+
+      }
+      ..etc
+      */
+    }  
+    );
+
   }
 }
