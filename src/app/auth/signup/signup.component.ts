@@ -5,11 +5,11 @@ import { UniqueUsername } from '../validators/unique-username';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-signout',
-  templateUrl: './signout.component.html',
-  styleUrls: ['./signout.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class SignoutComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
   authForm = new FormGroup({
     username: new FormControl('',
@@ -39,8 +39,8 @@ export class SignoutComponent implements OnInit {
     if(this.authForm.invalid){
       return;
     }
-    //Qua vengono usate le function e non direttamente i metodi perchè bindiamo alle function la classe signout.
-    //Senza function, non possiamo accedere i campi della classe signout.
+    //Qua vengono usate le function e non direttamente i metodi perchè bindiamo alle function la classe Signup.
+    //Senza function, non possiamo accedere i campi della classe Signup.
 
     this.authService.signup(this.authForm.value)
     .subscribe({
