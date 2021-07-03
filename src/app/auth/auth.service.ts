@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 interface UsernameAvailableResponse {
   available:true;
@@ -20,7 +22,10 @@ interface SignupResponse {
 })
 export class AuthService {
 
-  basePath: string = 'https://api.angular-email.com'
+  basePath: string = 'https://api.angular-email.com';
+  //$ per convenzione -> è un observable o come un observable.
+  signedin$ = new BehaviorSubject(false);
+
   constructor(private http: HttpClient) { }
 
   usernameAvailable(username: string){
@@ -30,6 +35,11 @@ export class AuthService {
   }
 
   signup(credentials: SignupCredentials){
-     return this.http.post<SignupResponse>(this.basePath + '/auth/signup', credentials);
+     return this.http.post<SignupResponse>(this.basePath + '/auth/signup', credentials)
+     .pipe(
+       tap(() => {
+         console.log("TAP PIPE")
+         this.signedin$.next(true);
+       }));
   }
 }
