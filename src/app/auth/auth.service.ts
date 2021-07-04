@@ -42,4 +42,11 @@ export class AuthService {
          this.signedin$.next(true);
        }));
   }
+
+  checkAuth() {
+    return this.http.get<any>(`${this.basePath}/auth/signedin`)
+    .pipe(
+      tap((response) => console.log(response))
+    );
+  }
 }

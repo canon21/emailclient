@@ -30,4 +30,9 @@ export class AppComponent {
     console.log("SignedIn:" + this.signedin);
   } */
 
+  ngOnInit(){
+    //per vedere se l'utente è già loggato.
+    this.authService.checkAuth().subscribe(() => {});
+  }
+
 }
