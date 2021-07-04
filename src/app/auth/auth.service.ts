@@ -22,6 +22,11 @@ interface SignedInResponse {
   username: string
 }
 
+interface SigninCredentials {
+  username: string,
+  password: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,4 +73,11 @@ export class AuthService {
     );
   }
   
+  signin(credentials: SigninCredentials) {
+      return this.http.post(`${this.basePath}/auth/signin`, credentials)
+      .pipe(
+        //non viene eseguito in caso di errore. Es credenziali errate.
+        tap(() => { this.signedin$.next(true) })
+      );
+  }
 }

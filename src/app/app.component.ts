@@ -32,7 +32,7 @@ export class AppComponent {
 
   ngOnInit(){
     //per vedere se l'utente è già loggato.
-    this.authService.checkAuth().subscribe(() => {});
+    this.authService.checkAuth().subscribe(( response ) => { console.log(response)});
   }
 
 }
