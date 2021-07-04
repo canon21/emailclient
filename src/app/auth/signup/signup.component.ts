@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatchPassword } from '../validators/match-password';
 import { UniqueUsername } from '../validators/unique-username';
 import { AuthService } from '../auth.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
   );
 
   //dependency injection.
-  constructor(private matchPassword: MatchPassword, private uniqueUsername: UniqueUsername, private authService: AuthService) { }
+  constructor(private matchPassword: MatchPassword, private uniqueUsername: UniqueUsername, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -45,8 +45,7 @@ export class SignupComponent implements OnInit {
     this.authService.signup(this.authForm.value)
     .subscribe({
       next: (response) => {
-        console.log(this);
-        //route to another page.
+        this.router.navigateByUrl('/inbox');
       },
       error: (err) => {
         if(!err.status) {

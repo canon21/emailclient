@@ -15,7 +15,7 @@ export class SignoutComponent implements OnInit {
     //chiamo il metodo e mi sotto scrivo all'observable.
     this.authService.signout().subscribe(() => {
       // Navigate the user in signin page.
-      setTimeout(() => this.router.navigateByUrl(`/`), 2000);     
+      setTimeout(() => this.router.navigateByUrl(`/`), 1000);     
     })
   }
 

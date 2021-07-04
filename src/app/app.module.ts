@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 //eager loading.
 import { AuthModule } from './auth/auth.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
