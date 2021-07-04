@@ -17,6 +17,11 @@ interface SignupResponse {
   username: string
 }
 
+interface SignedInResponse {
+  authenticated: boolean,
+  username: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,9 +53,19 @@ export class AuthService {
   //Aggiungiamo le options nella chiamata e con withCredentials true diciamo di salvare i cookies, così da essere inviati
   //in chiamate successive.
   checkAuth() {
-    return this.http.get(`${this.basePath}/auth/signedin` /*, {withCredentials:true}*/)
+    return this.http.get<SignedInResponse>(`${this.basePath}/auth/signedin` /*, {withCredentials:true}*/)
     .pipe(
-      tap((response) => console.log(response))
+      tap(({ authenticated }) => {
+        this.signedin$.next(authenticated);
+      }
+    ));
+  }
+
+  signout() {
+    return this.http.post(`${this.basePath}/auth/signout`, {})
+    .pipe(
+      tap( () => this.signedin$.next(false))
     );
   }
+  
 }
