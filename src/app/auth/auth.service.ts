@@ -37,18 +37,18 @@ export class AuthService {
   //Aggiungiamo le options nella chiamata e con withCredentials true diciamo di salvare i cookies, così da essere inviati
   //in chiamate successive.
   signup(credentials: SignupCredentials){
-     return this.http.post<SignupResponse>(this.basePath + '/auth/signup', credentials, { withCredentials:true })
+     return this.http.post<SignupResponse>(this.basePath + '/auth/signup', credentials/*, { withCredentials:true } */)
      .pipe(
        tap(() => {
          console.log("TAP PIPE")
          this.signedin$.next(true);
        }));
   }
-  
+
   //Aggiungiamo le options nella chiamata e con withCredentials true diciamo di salvare i cookies, così da essere inviati
   //in chiamate successive.
   checkAuth() {
-    return this.http.get(`${this.basePath}/auth/signedin`, {withCredentials:true})
+    return this.http.get(`${this.basePath}/auth/signedin` /*, {withCredentials:true}*/)
     .pipe(
       tap((response) => console.log(response))
     );
