@@ -1,10 +1,12 @@
 <div class="ui celled list">
-    <div class="item" *ngFor="let email of emails">
+    <div class="item" *ngFor="let email of emails" >
+        <a [routerLink]="email.id" routerLinkActive="active">
         <div class="content">
             <div class="header">
                 {{ email.subject != "" ? email.subject : "No Subject" }}
             </div>
             <p>{{ email.from }} </p>
         </div>
+        </a>
     </div>
 </div>
