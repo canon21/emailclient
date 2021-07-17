@@ -34,7 +34,7 @@ export class AuthService {
 
   basePath: string = 'https://api.angular-email.com';
   //$ per convenzione -> è un observable o come un observable.
-  signedin$ = new BehaviorSubject(false);
+  signedin$ = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
