@@ -10,14 +10,8 @@ const routes: Routes = [
     path: '', 
     component: HomeComponent,
     children: [
-      {
-        path:'',
-        component: PlaceholderComponent
-      },
-      {
-        path: '',
-        component: EmailShowComponent
-      }
+      { path:':id', component: EmailShowComponent},
+      { path:'', component: PlaceholderComponent},
     ]
 }
 ];
