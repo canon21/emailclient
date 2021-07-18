@@ -7,7 +7,7 @@ import { EmailService } from '../email.service';
   templateUrl: './email-reply.component.html',
   styleUrls: ['./email-reply.component.css']
 })
-export class EmailReplyComponent {
+export class EmailReplyComponent{
 
   showModal = false;
 
@@ -15,8 +15,8 @@ export class EmailReplyComponent {
     
   constructor(private emailService: EmailService) { }
 
-  ngOnChange(): void {
-
+  ngOnChanges(): void {
+    console.log("ON CHANGE")
     const text = this.email.text.replace(/\n/gi, '\n> ');
     this.email = {
       ...this.email,
