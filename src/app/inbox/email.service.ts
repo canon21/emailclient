@@ -5,7 +5,17 @@ import { HttpClient } from '@angular/common/http';
 interface EmailSummary {
   id: string,
   subject: string,
-  from: string
+  from: string,
+
+}
+
+interface Email {
+  id: string,
+  subject: string,
+  from: string,
+  text: string,
+  to: string,
+  html: string
 }
 
 @Injectable({
@@ -19,6 +29,13 @@ export class EmailService {
 
   getEmails() {
     return this.http.get<EmailSummary[]>(`${this.basePath}/emails`, {
+      //adding cookies
+      withCredentials:true
+    });
+  }
+
+  getEmailById(id: string) {
+    return this.http.get<Email>(`${this.basePath}/emails/${id}`, {
       //adding cookies
       withCredentials:true
     });
