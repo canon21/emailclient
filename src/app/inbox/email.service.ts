@@ -1,21 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Email } from './email';
 
 interface EmailSummary {
   id: string,
   subject: string,
   from: string,
 
-}
-
-interface Email {
-  id: string,
-  subject: string,
-  from: string,
-  text: string,
-  to: string,
-  html: string
 }
 
 @Injectable({

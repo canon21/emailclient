@@ -1,1 +1,11 @@
-<p>email-show works!</p>
+<div class="header">
+    <div>
+        <h3>{{ emailSelected.subject ? emailSelected.subject : "No Subject" }}</h3>
+        <div> 
+            From: <i>{{ emailSelected.from }}</i>
+        </div>
+        <div>
+            To: <i>{{ emailSelected.to }}</i>
+        </div>
+    </div>
+</div>
