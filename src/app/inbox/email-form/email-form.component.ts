@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Email } from '../email';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -11,6 +11,9 @@ export class EmailFormComponent implements OnInit {
 
   @Input()
   email: Email
+
+  @Output() emailSubmit = new EventEmitter();
+
   emailForm : FormGroup;
 
   constructor() { }
@@ -26,4 +29,15 @@ export class EmailFormComponent implements OnInit {
       });
   }
 
+  
+  onSubmitEmail() {
+
+    if(this.emailForm.invalid){
+      return;
+    }
+
+    //i valori disabled non sono estratti come value bisogna usare:
+    //console.log(this.emailForm.getRawValue());
+    this.emailSubmit.emit(this.emailForm.value);
+  }
 }

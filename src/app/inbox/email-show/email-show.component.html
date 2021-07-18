@@ -8,6 +8,9 @@
             To: <i>{{ emailSelected.to }}</i>
         </div>
     </div>
+    <div>
+        <app-email-reply [email]="emailSelected"></app-email-reply>
+    </div>
 </div>
 <div class="ui divider">
     <div [innerHTML] = "emailSelected.html ? emailSelected.html : emailSelected.text"> </div>

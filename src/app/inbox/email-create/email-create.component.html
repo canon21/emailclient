@@ -1,4 +1,4 @@
-<button class="ui primary button" (click)="showModal=true">
+<button class="ui button inverted primary fluid" (click)="showModal=true">
     Create
 </button>
 
@@ -6,5 +6,5 @@
     <div modalTitle>
         New Email
     </div>
-    <app-email-form [email]="email"></app-email-form>
+    <app-email-form [email]="email" (emailSubmit)="onSubmit($event)"></app-email-form>
 </app-modal>

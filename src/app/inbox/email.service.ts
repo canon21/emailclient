@@ -32,4 +32,7 @@ export class EmailService {
     });
   }
 
+  sendEmail(email: Email) {
+    return this.http.post(`${this.basePath}/emails`, email);
+  }
 }
