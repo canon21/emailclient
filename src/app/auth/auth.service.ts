@@ -27,6 +27,10 @@ interface SigninCredentials {
   password: string
 }
 
+interface SigninResponse {
+  username: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +39,7 @@ export class AuthService {
   basePath: string = 'https://api.angular-email.com';
   //$ per convenzione -> è un observable o come un observable.
   signedin$ = new BehaviorSubject(null);
+  username: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -49,9 +54,10 @@ export class AuthService {
   signup(credentials: SignupCredentials){
      return this.http.post<SignupResponse>(this.basePath + '/auth/signup', credentials/*, { withCredentials:true } */)
      .pipe(
-       tap(() => {
+       tap(({username}) => {
          console.log("TAP PIPE")
          this.signedin$.next(true);
+         this.username = username;
        }));
   }
 
@@ -60,8 +66,9 @@ export class AuthService {
   checkAuth() {
     return this.http.get<SignedInResponse>(`${this.basePath}/auth/signedin` /*, {withCredentials:true}*/)
     .pipe(
-      tap(({ authenticated }) => {
+      tap(({ authenticated, username }) => {
         this.signedin$.next(authenticated);
+        this.username = username;
       }
     ));
   }
@@ -74,10 +81,13 @@ export class AuthService {
   }
   
   signin(credentials: SigninCredentials) {
-      return this.http.post(`${this.basePath}/auth/signin`, credentials)
+      return this.http.post<SigninResponse>(`${this.basePath}/auth/signin`, credentials)
       .pipe(
         //non viene eseguito in caso di errore. Es credenziali errate.
-        tap(() => { this.signedin$.next(true) })
+        tap(({username}) => { 
+          this.signedin$.next(true);
+          this.username = username;
+        })
       );
   }
 }
