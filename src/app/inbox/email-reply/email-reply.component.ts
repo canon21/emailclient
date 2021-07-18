@@ -16,8 +16,9 @@ export class EmailReplyComponent{
   constructor(private emailService: EmailService) { }
 
   ngOnChanges(): void {
-    console.log("ON CHANGE")
-    const text = this.email.text.replace(/\n/gi, '\n> ');
+    console.log("ON CHANGE");
+    console.log(this.email);
+    const text = this.email.text ? this.email.text.replace(/\n/gi, '\n> ') : "Image or HTML style";
     this.email = {
       ...this.email,
       to: this.email.from,
